@@ -1,0 +1,16 @@
+services:
+  yamlls:
+    build: ./yamlls
+    image: yamlls
+
+  bashls:
+    build: ./bashls
+    image: bashls
+
+  compose-lsp:
+    build: ./docker_compose
+    image: compose-lsp
+
+  web:
+    build: ./web
+    image: web

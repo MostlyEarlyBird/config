@@ -1,0 +1,11 @@
+services:
+  az:
+    build:
+      context: .
+      dockerfile: azure-cil.dockerfile
+    image: azure/cli
+  convert:
+    build:
+      context: .
+      dockerfile: convppt.dockerfile
+    image: convert-to-pdf

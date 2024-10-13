@@ -1,0 +1,23 @@
+#!/bin/bash
+version=$(go version | cut -d' ' -f 3)
+latest=$(curl -s "https://go.dev/VERSION?m=text" | head -1)
+if [[ "$version" == "$latest" ]]; then
+    echo "latest go release already installed: $latest"
+    exit 0
+else
+    echo "The local Go version is ${version}. A new release ${latest} is available."
+    read -p "Continue (y/n)?" choice
+    case "$choice" in
+    y | Y)
+        release="${latest}.linux-amd64.tar.gz"
+        tmp_dir=$(mktemp -d)
+        wget -q "https://go.dev/dl/${release}" -O "$tmp_dir/$release"
+        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "$tmp_dir/$release"
+        rm -rf $tmp_dir
+        echo $(go version)
+        ;;
+    *)
+        echo "canceled"
+        ;;
+    esac
+fi

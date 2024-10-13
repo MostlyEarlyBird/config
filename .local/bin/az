@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker run --rm -v /run/user/1000/docker.sock:/run/user/1000/docker.sock \
+    -v $HOME/.docker:/root/.docker -v $HOME/.azure:/root/.azure -e AZURE_CLIENT_ID=$AZURE_CLIENT_ID \
+    -e AZURE_SECRET=$AZURE_SECRET -e AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID -i azure/cli $@

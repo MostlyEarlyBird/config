@@ -1,0 +1,10 @@
+#!/bin/bash
+
+choice=$(awk -F 'Host ' '$2{print $2}' ~/.ssh/config | fzf --height 20% --tmux center --border)
+if [[ -n "$choice" ]]; then
+    if [ -z "${TMUX+x}" ]; then
+        tmux new "ssh $choice"
+    else
+        tmux splitw -h "ssh $choice"
+    fi
+fi
